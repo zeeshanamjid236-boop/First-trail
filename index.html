@@ -8,15 +8,10 @@
 <meta name="keywords" content="Zeeshan Amjid, First Trail, Champions, Zeeshan Amjid website">
 <meta name="author" content="Zeeshan Amjid">
 <link rel="stylesheet" href="style.css">
-
-<!-- 1. Pehle Supabase Library -->
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-
-<!-- 2. Phir Supabase Config -->
 <script>
   const SUPABASE_URL = 'https://bhozzxzgrxendoypnyevo.supabase.co';
-  // YAHAN APNI REAL ANON KEY PASTE KARO - Supabase > Project Settings > API Keys > anon public
-  const SUPABASE_ANON_KEY = 'PASTE_YOUR_REAL_ANON_KEY_HERE';
+  const SUPABASE_ANON_KEY = 'PASTE_YOUR_ANON_KEY_HERE';
   const supabaseClient = supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
 </script>
 </head>
@@ -25,54 +20,66 @@
   <div class="ambient ambient-two"></div>
 
   <header class="topbar">
-    <div class="logo">CHAMPIONS - CLASS COMMUNITY</div>
-    <button id="setupStatusBtn">Setup status</button>
+    <div style="display:flex; align-items:center; gap:10px;">
+      <div style="width:40px;height:40px;background:linear-gradient(135deg,#a855f7,#ec4899);border-radius:10px;display:grid;place-items:center;">✦</div>
+      <div><b>CHAMPIONS</b><br><small style="opacity:0.7;letter-spacing:2px;">CLASS COMMUNITY</small></div>
+    </div>
+    <button id="setupStatusBtn" style="background:#1f1f2e;color:white;padding:8px 16px;border-radius:20px;border:1px solid #333;">Setup status</button>
   </header>
 
-  <main>
-    <section id="hero">
-      <p>YOUR CLASS. YOUR SPACE.</p>
-      <h1>Make memories<br>Be a Champion.</h1>
-      <p>A fun shared space for class voting, daily feedback, photos, poetry and friendly messages.</p>
-      <button onclick="document.getElementById('vote').scrollIntoView()">Explore the fun</button>
+  <main style="padding:40px 20px; max-width:1200px; margin:auto;">
+    <section>
+      <p style="color:#a78bfa; letter-spacing:3px; font-size:12px; font-weight:bold;">● YOUR CLASS. YOUR SPACE.</p>
+      <h1 style="font-size:60px; line-height:1; margin:20px 0;">Make memories<br><span style="background:linear-gradient(90deg,#c4b5fd,#f9a8d4);-webkit-background-clip:text;-webkit-text-fill-color:transparent;">Be a Champion.</span></h1>
+      <p style="opacity:0.7; max-width:500px; margin-bottom:30px;">A fun shared space for class voting, daily feedback, photos, poetry and friendly messages.</p>
+      <a href="#vote" style="background:linear-gradient(90deg,#ddd6fe,#f9a8d4); color:black; padding:14px 24px; border-radius:30px; text-decoration:none; font-weight:bold;">Explore the fun ↗</a>
+      <span style="margin-left:20px; opacity:0.6;">See community wall ↓</span>
     </section>
 
-    <!-- VOTING SECTION -->
-    <section id="vote">
-      <h2>Vote Your Champion</h2>
-      <div id="championsList">Loading champions...</div>
+    <section id="vote" style="margin-top:100px;">
+      <h2 style="font-size:32px;">🏆 Vote Your Champion</h2>
+      <p style="opacity:0.6;">Vote karo aur dekho kaun hai sabse popular</p>
+      <div id="championsList" style="display:grid; grid-template-columns:repeat(auto-fill,minmax(250px,1fr)); gap:20px; margin-top:20px;">Loading champions...</div>
     </section>
 
-    <!-- MESSAGES SECTION -->
-    <section id="messages">
-      <h2>Community Wall</h2>
-      <input type="text" id="msgInput" placeholder="Apna message likho...">
-      <button id="sendMsgBtn">Send Message</button>
-      <div id="messagesList"></div>
+    <section id="community" style="margin-top:80px;">
+      <h2 style="font-size:32px;">💬 Community Wall - Friendly Messages</h2>
+      <div style="background:rgba(255,255,255,0.05); padding:20px; border-radius:20px; margin-top:20px;">
+        <div style="display:flex; gap:10px;">
+          <input type="text" id="msgInput" placeholder="Apna pyara sa message likho..." style="flex:1; padding:12px 16px; border-radius:30px; border:1px solid #333; background:#0f0f1a; color:white;">
+          <button id="sendMsgBtn" style="background:white; color:black; padding:12px 24px; border-radius:30px; font-weight:bold; border:none; cursor:pointer;">Send</button>
+        </div>
+        <div id="messagesList" style="margin-top:20px; display:flex; flex-direction:column; gap:10px;"></div>
+      </div>
+    </section>
+
+    <section style="margin-top:80px; opacity:0.5; text-align:center;">
+      <p>Made for your class community - First Trail</p>
     </section>
   </main>
 
-  <footer>Made for your class community</footer>
-
   <dialog id="infoDialog"></dialog>
 
-  <!-- 3. Sabse Akhir me Aapki Script -->
   <script src="script.js"></script>
   <script>
-    // Voting aur Messaging ka working code
     async function loadChampions() {
-      const { data, error } = await supabaseClient.from('champions').select('*');
-      if (error) { console.log(error); return; }
+      const { data, error } = await supabaseClient.from('champions').select('*').order('id');
+      if (error) { document.getElementById('championsList').innerText = 'Error: ' + error.message; return; }
       const list = document.getElementById('championsList');
       list.innerHTML = '';
       data.forEach(c => {
-        list.innerHTML += `<div class="champ-card"><b>${c.name}</b> - Score: ${c.score} <button onclick="doVote(${c.id}, ${c.score})">Vote</button></div>`;
+        list.innerHTML += `
+          <div style="background:rgba(255,255,255,0.06); border:1px solid rgba(255,255,255,0.1); padding:20px; border-radius:20px;">
+            <h3>${c.name}</h3>
+            <p style="font-size:28px; font-weight:bold; margin:10px 0;">${c.score} Votes</p>
+            <button onclick="doVote(${c.id}, ${c.score})" style="width:100%; padding:10px; border-radius:30px; background:white; color:black; font-weight:bold; border:none; cursor:pointer;">Vote ${c.name} ❤️</button>
+          </div>`;
       });
     }
 
     async function doVote(id, currentScore) {
       const { error } = await supabaseClient.from('champions').update({ score: currentScore + 1 }).eq('id', id);
-      if (!error) { alert('Vote ho gaya!'); loadChampions(); }
+      if (!error) { loadChampions(); } else { alert(error.message); }
     }
 
     async function loadMessages() {
@@ -80,7 +87,7 @@
       const list = document.getElementById('messagesList');
       list.innerHTML = '';
       data?.forEach(m => {
-        list.innerHTML += `<div class="msg">${m.message}</div>`;
+        list.innerHTML += `<div style="background:rgba(255,255,255,0.08); padding:12px 16px; border-radius:16px;">${m.message}</div>`;
       });
     }
 
@@ -88,14 +95,12 @@
     if (sendBtn) {
       sendBtn.addEventListener('click', async () => {
         const input = document.getElementById('msgInput');
-        if (!input.value) return;
-        await supabaseClient.from('chat_messages').insert([{ message: input.value }]);
-        input.value = '';
-        loadMessages();
+        if (!input.value.trim()) return;
+        const { error } = await supabaseClient.from('chat_messages').insert([{ message: input.value }]);
+        if (!error) { input.value = ''; loadMessages(); } else { alert(error.message); }
       });
     }
 
-    // Load on start
     loadChampions();
     loadMessages();
   </script>
