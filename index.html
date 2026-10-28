@@ -1,36 +1,12 @@
 <!doctype html>
 <html lang="en">
-<head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="theme-color" content="#101127">
-  <title>CHAMPIONS — Class Community</title>
-  <link rel="stylesheet" href="style.css">
-  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.min.js"></script>
-<script>
-  const SUPABASE_URL = 'https://bhoxzxgrxendoypnyevo.supabase.co';
-  const SUPABASE_ANON_KEY = 'PASTE_YOUR_ANON_KEY_HERE';
-  
-  const supabaseClient = supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
-</script>
-  <script>
-// Har page visit save hoga
-async function saveActivity(action, details) {
-  const name = localStorage.getItem('champion_name') || 'Guest';
-  await supabaseClient.from('user_activities').insert([
-    { user_name: name, action: action, page: window.location.pathname, details: details }
-  ]);
-}
-
-// Page khulte hi save karo
-saveActivity('page_visit', 'Visited homepage');
-
-// Agar koi vote kare to
-// Aapke vote button par ye lagao: onclick="saveActivity('vote', 'Voted for Ali')"
-
-// Agar koi wall par likhe to
-// onclick="saveActivity('community_post', 'Posted on wall')"
-</script>
+<head><head>
+  <title>Zeeshan Amjid - Champions Community</title>
+  <meta name="description" content="Zeeshan Amjid ki official Champions Community website. First Trail Class Community">
+  <meta name="keywords" content="Zeeshan Amjid, First Trail, Champions, Zeeshan Amjid website">
+  <meta name="author" content="Zeeshan Amjid">
+  <meta name="google-site-verification" content="PASTE_HERE_LATER">
+</head>
 </head>
   
 <body>
