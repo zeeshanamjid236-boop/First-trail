@@ -1,90 +1,103 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
-  <title>Zeeshan Amjid - Champions Community</title>
-  <meta name="description" content="Zeeshan Amjid ki official Champions Community website. First Trail Class Community">
-  <meta name="keywords" content="Zeeshan Amjid, First Trail, Champions, Zeeshan Amjid website">
-  <meta name="author" content="Zeeshan Amjid">
-  <meta name="google-site-verification" content="PASTE_HERE_LATER">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Zeeshan Amjid - Champions Community</title>
+<meta name="description" content="Zeeshan Amjid ki official Champions Community website. First Trail Class Community">
+<meta name="keywords" content="Zeeshan Amjid, First Trail, Champions, Zeeshan Amjid website">
+<meta name="author" content="Zeeshan Amjid">
 <link rel="stylesheet" href="style.css">
-<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-<script>
-  const supabaseClient = supabase.createClient(
-    'https://bhozzxzgrxendoypnyevo.supabase.co',
-    'EYE_YOUR_ANON_KEY_HERE'
-  );
-</script>
-<script src="script.js"></script>
-</head>
-</head>
 
-  
+<!-- 1. Pehle Supabase Library -->
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
+<!-- 2. Phir Supabase Config -->
+<script>
+  const SUPABASE_URL = 'https://bhozzxzgrxendoypnyevo.supabase.co';
+  // YAHAN APNI REAL ANON KEY PASTE KARO - Supabase > Project Settings > API Keys > anon public
+  const SUPABASE_ANON_KEY = 'PASTE_YOUR_REAL_ANON_KEY_HERE';
+  const supabaseClient = supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+</script>
+</head>
 <body>
-  <div class="ambient ambient-one"></div><div class="ambient ambient-two"></div>
+  <div class="ambient ambient-one"></div>
+  <div class="ambient ambient-two"></div>
+
   <header class="topbar">
-    <a class="brand" href="#"><span class="brand-mark">✦</span><span>CHAMPIONS<small>CLASS COMMUNITY</small></span></a>
-    <nav><a href="#vote">Voting</a><a href="#wall">Community wall</a><a href="#chat">Chat</a></nav>
-    <button class="button button-ghost" id="setupButton">Setup status</button>
+    <div class="logo">CHAMPIONS - CLASS COMMUNITY</div>
+    <button id="setupStatusBtn">Setup status</button>
   </header>
 
   <main>
-    <section class="hero">
-      <div class="hero-copy">
-        <div class="eyebrow"><span class="live-dot"></span> YOUR CLASS. YOUR SPACE.</div>
-        <h1>Make memories.<br><span>Be a Champion.</span></h1>
-        <p>A fun shared space for class voting, daily feedback, photos, poetry and friendly messages.</p>
-        <div class="hero-actions"><a class="button button-primary" href="#vote">Explore the fun <span>↗</span></a><a class="text-link" href="#wall">See community wall ↓</a></div>
-        <div class="hero-note"><span class="avatar-stack"><i>⭐</i><i>💜</i><i>🚀</i></span><span>Made for your class community</span></div>
-      </div>
-      <div class="hero-art" aria-label="Decorative champion card">
-        <div class="orbit orbit-a"></div><div class="orbit orbit-b"></div>
-        <div class="hero-card"><div class="trophy">🏆</div><div class="hero-card-label">THE CHAMPION SPIRIT</div><h2>Small moments.<br>Big memories.</h2><div class="card-bottom"><span>TEAMWORK</span><span>✦ ✦ ✦</span></div></div>
-        <div class="floating-chip chip-top">✨ Good vibes only</div><div class="floating-chip chip-bottom">💬 Your voice matters</div>
-      </div>
+    <section id="hero">
+      <p>YOUR CLASS. YOUR SPACE.</p>
+      <h1>Make memories<br>Be a Champion.</h1>
+      <p>A fun shared space for class voting, daily feedback, photos, poetry and friendly messages.</p>
+      <button onclick="document.getElementById('vote').scrollIntoView()">Explore the fun</button>
     </section>
 
-    <section class="section-head" id="vote"><div><div class="eyebrow">01 / HAVE YOUR SAY</div><h2>Class voting</h2><p>Choose an option and cast your vote.</p></div><span class="section-icon">🗳️</span></section>
-    <section class="panel vote-panel">
-      <div class="panel-top"><div><span class="mini-label">TODAY'S POLL</span><h3 id="pollQuestion">Who brings the best class vibes?</h3></div><span class="pill">FRIENDLY FUN</span></div>
-      <div id="voteOptions" class="vote-options">
-        <button class="vote-option" data-option="The Funny One"><span class="option-emoji">😂</span><span><b>The Funny One</b><small>Makes everyone laugh</small></span><span class="option-arrow">↗</span></button>
-        <button class="vote-option" data-option="The Helpful One"><span class="option-emoji">🤝</span><span><b>The Helpful One</b><small>Always lends a hand</small></span><span class="option-arrow">↗</span></button>
-        <button class="vote-option" data-option="The Creative One"><span class="option-emoji">🎨</span><span><b>The Creative One</b><small>Full of bright ideas</small></span><span class="option-arrow">↗</span></button>
-      </div>
-      <div class="inline-form"><input id="voterName" maxlength="40" placeholder="Your name (optional)"><button id="submitVote" class="button button-primary">Cast vote</button></div>
-      <p id="voteStatus" class="status" role="status">Demo mode is active until you connect the database.</p>
-      <div id="voteResults" class="results hidden"></div>
+    <!-- VOTING SECTION -->
+    <section id="vote">
+      <h2>Vote Your Champion</h2>
+      <div id="championsList">Loading champions...</div>
     </section>
 
-    <section class="section-head" id="wall"><div><div class="eyebrow">02 / SHARE SOMETHING</div><h2>Community wall</h2><p>Post a kind message, a poem or a class memory.</p></div><span class="section-icon">💌</span></section>
-    <section class="wall-grid">
-      <div class="panel post-panel">
-        <div class="panel-top"><div><span class="mini-label">CREATE A POST</span><h3>Drop some good vibes</h3></div><span class="section-icon small">✍️</span></div>
-        <form id="postForm">
-          <label for="postName">Your name</label><input id="postName" maxlength="40" placeholder="e.g. Ali" required>
-          <label for="postType">Post type</label><select id="postType"><option value="Memory">Class memory</option><option value="Poetry">Poetry</option><option value="Shout-out">Shout-out</option><option value="Photo">Photo link</option></select>
-          <label for="postText">Your message</label><textarea id="postText" maxlength="700" rows="4" placeholder="Write something positive..." required></textarea>
-          <label for="postImage">Image URL (optional)</label><input id="postImage" type="url" placeholder="https://...">
-          <button class="button button-primary full" type="submit">Publish to wall <span>↗</span></button>
-        </form>
-        <p id="postStatus" class="status" role="status">Posts are local demo examples until the database is connected.</p>
-      </div>
-      <div class="wall-feed"><div class="feed-heading"><h3>Latest from the class</h3><button class="text-button" id="refreshWall">↻ Refresh</button></div><div id="postsList" class="posts-list"></div></div>
+    <!-- MESSAGES SECTION -->
+    <section id="messages">
+      <h2>Community Wall</h2>
+      <input type="text" id="msgInput" placeholder="Apna message likho...">
+      <button id="sendMsgBtn">Send Message</button>
+      <div id="messagesList"></div>
     </section>
-
-    <section class="section-head" id="chat"><div><div class="eyebrow">03 / STAY CONNECTED</div><h2>Class chat</h2><p>Friendly messages for your community.</p></div><span class="section-icon">💬</span></section>
-    <section class="panel chat-panel">
-      <div class="chat-notice">🌈 <span><b>Keep it kind.</b> Don’t share passwords, phone numbers, addresses or private information.</span></div>
-      <div id="chatMessages" class="chat-messages"><div class="empty-state">👋 Welcome! Start a friendly conversation.</div></div>
-      <form id="chatForm" class="chat-form"><input id="chatName" maxlength="40" placeholder="Your name" required><input id="chatText" maxlength="500" placeholder="Write a friendly message..." required><button class="button button-primary" type="submit">Send ↗</button></form>
-      <p id="chatStatus" class="status" role="status">Chat demo is local to this browser until connected.</p>
-    </section>
-
-    <section class="bottom-cta"><div><div class="eyebrow">YOUR COMMUNITY, YOUR RULES</div><h2>Make this space awesome.</h2><p>Be respectful, celebrate each other and keep it fun.</p></div><div class="cta-star">✦</div></section>
   </main>
-  <footer><a class="brand footer-brand" href="#"><span class="brand-mark">✦</span><span>CHAMPIONS<small>CLASS COMMUNITY</small></span></a><span>Made for fun · Keep it kind</span><button id="adminHint" class="text-button">Admin setup</button></footer>
 
-  <dialog id="infoDialog"><div class="dialog-head"><h3 id="dialogTitle">Setup status</h3><button id="closeDialog" class="close-button" aria-label="Close">×</button></div><div id="dialogBody" class="dialog-body"></div></dialog>
+  <footer>Made for your class community</footer>
+
+  <dialog id="infoDialog"></dialog>
+
+  <!-- 3. Sabse Akhir me Aapki Script -->
   <script src="script.js"></script>
+  <script>
+    // Voting aur Messaging ka working code
+    async function loadChampions() {
+      const { data, error } = await supabaseClient.from('champions').select('*');
+      if (error) { console.log(error); return; }
+      const list = document.getElementById('championsList');
+      list.innerHTML = '';
+      data.forEach(c => {
+        list.innerHTML += `<div class="champ-card"><b>${c.name}</b> - Score: ${c.score} <button onclick="doVote(${c.id}, ${c.score})">Vote</button></div>`;
+      });
+    }
+
+    async function doVote(id, currentScore) {
+      const { error } = await supabaseClient.from('champions').update({ score: currentScore + 1 }).eq('id', id);
+      if (!error) { alert('Vote ho gaya!'); loadChampions(); }
+    }
+
+    async function loadMessages() {
+      const { data } = await supabaseClient.from('chat_messages').select('*').order('created_at', { ascending: false }).limit(20);
+      const list = document.getElementById('messagesList');
+      list.innerHTML = '';
+      data?.forEach(m => {
+        list.innerHTML += `<div class="msg">${m.message}</div>`;
+      });
+    }
+
+    const sendBtn = document.getElementById('sendMsgBtn');
+    if (sendBtn) {
+      sendBtn.addEventListener('click', async () => {
+        const input = document.getElementById('msgInput');
+        if (!input.value) return;
+        await supabaseClient.from('chat_messages').insert([{ message: input.value }]);
+        input.value = '';
+        loadMessages();
+      });
+    }
+
+    // Load on start
+    loadChampions();
+    loadMessages();
+  </script>
 </body>
 </html>
