@@ -1,108 +1,79 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Zeeshan Amjid - Champions Community</title>
-<meta name="description" content="Zeeshan Amjid ki official Champions Community website. First Trail Class Community">
-<meta name="keywords" content="Zeeshan Amjid, First Trail, Champions, Zeeshan Amjid website">
-<meta name="author" content="Zeeshan Amjid">
-<link rel="stylesheet" href="style.css">
-<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-<script>
-  const SUPABASE_URL = 'https://bhozzxzgrxendoypnyevo.supabase.co';
-  const SUPABASE_ANON_KEY = 'PASTE_YOUR_ANON_KEY_HERE';
-  const supabaseClient = supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
-</script>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#101127">
+  <title>CHAMPIONS — Class Community</title>
+  <link rel="stylesheet" href="style.css">
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 </head>
 <body>
-  <div class="ambient ambient-one"></div>
-  <div class="ambient ambient-two"></div>
-
+  <div class="ambient ambient-one"></div><div class="ambient ambient-two"></div>
   <header class="topbar">
-    <div style="display:flex; align-items:center; gap:10px;">
-      <div style="width:40px;height:40px;background:linear-gradient(135deg,#a855f7,#ec4899);border-radius:10px;display:grid;place-items:center;">✦</div>
-      <div><b>CHAMPIONS</b><br><small style="opacity:0.7;letter-spacing:2px;">CLASS COMMUNITY</small></div>
-    </div>
-    <button id="setupStatusBtn" style="background:#1f1f2e;color:white;padding:8px 16px;border-radius:20px;border:1px solid #333;">Setup status</button>
+    <a class="brand" href="#"><span class="brand-mark">✦</span><span>CHAMPIONS<small>CLASS COMMUNITY</small></span></a>
+    <nav><a href="#vote">Voting</a><a href="#wall">Community wall</a><a href="#chat">Chat</a></nav>
+    <button class="button button-ghost" id="setupButton">Setup status</button>
   </header>
 
-  <main style="padding:40px 20px; max-width:1200px; margin:auto;">
-    <section>
-      <p style="color:#a78bfa; letter-spacing:3px; font-size:12px; font-weight:bold;">● YOUR CLASS. YOUR SPACE.</p>
-      <h1 style="font-size:60px; line-height:1; margin:20px 0;">Make memories<br><span style="background:linear-gradient(90deg,#c4b5fd,#f9a8d4);-webkit-background-clip:text;-webkit-text-fill-color:transparent;">Be a Champion.</span></h1>
-      <p style="opacity:0.7; max-width:500px; margin-bottom:30px;">A fun shared space for class voting, daily feedback, photos, poetry and friendly messages.</p>
-      <a href="#vote" style="background:linear-gradient(90deg,#ddd6fe,#f9a8d4); color:black; padding:14px 24px; border-radius:30px; text-decoration:none; font-weight:bold;">Explore the fun ↗</a>
-      <span style="margin-left:20px; opacity:0.6;">See community wall ↓</span>
-    </section>
-
-    <section id="vote" style="margin-top:100px;">
-      <h2 style="font-size:32px;">🏆 Vote Your Champion</h2>
-      <p style="opacity:0.6;">Vote karo aur dekho kaun hai sabse popular</p>
-      <div id="championsList" style="display:grid; grid-template-columns:repeat(auto-fill,minmax(250px,1fr)); gap:20px; margin-top:20px;">Loading champions...</div>
-    </section>
-
-    <section id="community" style="margin-top:80px;">
-      <h2 style="font-size:32px;">💬 Community Wall - Friendly Messages</h2>
-      <div style="background:rgba(255,255,255,0.05); padding:20px; border-radius:20px; margin-top:20px;">
-        <div style="display:flex; gap:10px;">
-          <input type="text" id="msgInput" placeholder="Apna pyara sa message likho..." style="flex:1; padding:12px 16px; border-radius:30px; border:1px solid #333; background:#0f0f1a; color:white;">
-          <button id="sendMsgBtn" style="background:white; color:black; padding:12px 24px; border-radius:30px; font-weight:bold; border:none; cursor:pointer;">Send</button>
-        </div>
-        <div id="messagesList" style="margin-top:20px; display:flex; flex-direction:column; gap:10px;"></div>
+  <main>
+    <section class="hero">
+      <div class="hero-copy">
+        <div class="eyebrow"><span class="live-dot"></span> YOUR CLASS. YOUR SPACE.</div>
+        <h1>Make memories.<br><span>Be a Champion.</span></h1>
+        <p>A fun shared space for class voting, daily feedback, photos, poetry and friendly messages.</p>
+        <div class="hero-actions"><a class="button button-primary" href="#vote">Explore the fun <span>↗</span></a><a class="text-link" href="#wall">See community wall ↓</a></div>
+        <div class="hero-note"><span class="avatar-stack"><i>⭐</i><i>💜</i><i>🚀</i></span><span>Made for your class community</span></div>
+      </div>
+      <div class="hero-art" aria-label="Decorative champion card">
+        <div class="orbit orbit-a"></div><div class="orbit orbit-b"></div>
+        <div class="hero-card"><div class="trophy">🏆</div><div class="hero-card-label">THE CHAMPION SPIRIT</div><h2>Small moments.<br>Big memories.</h2><div class="card-bottom"><span>TEAMWORK</span><span>✦ ✦ ✦</span></div></div>
+        <div class="floating-chip chip-top">✨ Good vibes only</div><div class="floating-chip chip-bottom">💬 Your voice matters</div>
       </div>
     </section>
 
-    <section style="margin-top:80px; opacity:0.5; text-align:center;">
-      <p>Made for your class community - First Trail</p>
+    <section class="section-head" id="vote"><div><div class="eyebrow">01 / HAVE YOUR SAY</div><h2>Class voting</h2><p>Choose an option and cast your vote.</p></div><span class="section-icon">🗳️</span></section>
+    <section class="panel vote-panel">
+      <div class="panel-top"><div><span class="mini-label">TODAY'S POLL</span><h3 id="pollQuestion">Who brings the best class vibes?</h3></div><span class="pill">FRIENDLY FUN</span></div>
+      <div id="voteOptions" class="vote-options">
+        <button class="vote-option" data-option="The Funny One"><span class="option-emoji">😂</span><span><b>The Funny One</b><small>Makes everyone laugh</small></span><span class="option-arrow">↗</span></button>
+        <button class="vote-option" data-option="The Helpful One"><span class="option-emoji">🤝</span><span><b>The Helpful One</b><small>Always lends a hand</small></span><span class="option-arrow">↗</span></button>
+        <button class="vote-option" data-option="The Creative One"><span class="option-emoji">🎨</span><span><b>The Creative One</b><small>Full of bright ideas</small></span><span class="option-arrow">↗</span></button>
+      </div>
+      <div class="inline-form"><input id="voterName" maxlength="40" placeholder="Your name (optional)"><button id="submitVote" class="button button-primary">Cast vote</button></div>
+      <p id="voteStatus" class="status" role="status">Demo mode is active until you connect the database.</p>
+      <div id="voteResults" class="results hidden"></div>
     </section>
+
+    <section class="section-head" id="wall"><div><div class="eyebrow">02 / SHARE SOMETHING</div><h2>Community wall</h2><p>Post a kind message, a poem or a class memory.</p></div><span class="section-icon">💌</span></section>
+    <section class="wall-grid">
+      <div class="panel post-panel">
+        <div class="panel-top"><div><span class="mini-label">CREATE A POST</span><h3>Drop some good vibes</h3></div><span class="section-icon small">✍️</span></div>
+        <form id="postForm">
+          <label for="postName">Your name</label><input id="postName" maxlength="40" placeholder="e.g. Ali" required>
+          <label for="postType">Post type</label><select id="postType"><option value="Memory">Class memory</option><option value="Poetry">Poetry</option><option value="Shout-out">Shout-out</option><option value="Photo">Photo link</option></select>
+          <label for="postText">Your message</label><textarea id="postText" maxlength="700" rows="4" placeholder="Write something positive..." required></textarea>
+          <label for="postImage">Image URL (optional)</label><input id="postImage" type="url" placeholder="https://...">
+          <button class="button button-primary full" type="submit">Publish to wall <span>↗</span></button>
+        </form>
+        <p id="postStatus" class="status" role="status">Posts are local demo examples until the database is connected.</p>
+      </div>
+      <div class="wall-feed"><div class="feed-heading"><h3>Latest from the class</h3><button class="text-button" id="refreshWall">↻ Refresh</button></div><div id="postsList" class="posts-list"></div></div>
+    </section>
+
+    <section class="section-head" id="chat"><div><div class="eyebrow">03 / STAY CONNECTED</div><h2>Class chat</h2><p>Friendly messages for your community.</p></div><span class="section-icon">💬</span></section>
+    <section class="panel chat-panel">
+      <div class="chat-notice">🌈 <span><b>Keep it kind.</b> Don’t share passwords, phone numbers, addresses or private information.</span></div>
+      <div id="chatMessages" class="chat-messages"><div class="empty-state">👋 Welcome! Start a friendly conversation.</div></div>
+      <form id="chatForm" class="chat-form"><input id="chatName" maxlength="40" placeholder="Your name" required><input id="chatText" maxlength="500" placeholder="Write a friendly message..." required><button class="button button-primary" type="submit">Send ↗</button></form>
+      <p id="chatStatus" class="status" role="status">Chat demo is local to this browser until connected.</p>
+    </section>
+
+    <section class="bottom-cta"><div><div class="eyebrow">YOUR COMMUNITY, YOUR RULES</div><h2>Make this space awesome.</h2><p>Be respectful, celebrate each other and keep it fun.</p></div><div class="cta-star">✦</div></section>
   </main>
+  <footer><a class="brand footer-brand" href="#"><span class="brand-mark">✦</span><span>CHAMPIONS<small>CLASS COMMUNITY</small></span></a><span>Made for fun · Keep it kind</span><button id="adminHint" class="text-button">Admin setup</button></footer>
 
-  <dialog id="infoDialog"></dialog>
-
+  <dialog id="infoDialog"><div class="dialog-head"><h3 id="dialogTitle">Setup status</h3><button id="closeDialog" class="close-button" aria-label="Close">×</button></div><div id="dialogBody" class="dialog-body"></div></dialog>
   <script src="script.js"></script>
-  <script>
-    async function loadChampions() {
-      const { data, error } = await supabaseClient.from('champions').select('*').order('id');
-      if (error) { document.getElementById('championsList').innerText = 'Error: ' + error.message; return; }
-      const list = document.getElementById('championsList');
-      list.innerHTML = '';
-      data.forEach(c => {
-        list.innerHTML += `
-          <div style="background:rgba(255,255,255,0.06); border:1px solid rgba(255,255,255,0.1); padding:20px; border-radius:20px;">
-            <h3>${c.name}</h3>
-            <p style="font-size:28px; font-weight:bold; margin:10px 0;">${c.score} Votes</p>
-            <button onclick="doVote(${c.id}, ${c.score})" style="width:100%; padding:10px; border-radius:30px; background:white; color:black; font-weight:bold; border:none; cursor:pointer;">Vote ${c.name} ❤️</button>
-          </div>`;
-      });
-    }
-
-    async function doVote(id, currentScore) {
-      const { error } = await supabaseClient.from('champions').update({ score: currentScore + 1 }).eq('id', id);
-      if (!error) { loadChampions(); } else { alert(error.message); }
-    }
-
-    async function loadMessages() {
-      const { data } = await supabaseClient.from('chat_messages').select('*').order('created_at', { ascending: false }).limit(20);
-      const list = document.getElementById('messagesList');
-      list.innerHTML = '';
-      data?.forEach(m => {
-        list.innerHTML += `<div style="background:rgba(255,255,255,0.08); padding:12px 16px; border-radius:16px;">${m.message}</div>`;
-      });
-    }
-
-    const sendBtn = document.getElementById('sendMsgBtn');
-    if (sendBtn) {
-      sendBtn.addEventListener('click', async () => {
-        const input = document.getElementById('msgInput');
-        if (!input.value.trim()) return;
-        const { error } = await supabaseClient.from('chat_messages').insert([{ message: input.value }]);
-        if (!error) { input.value = ''; loadMessages(); } else { alert(error.message); }
-      });
-    }
-
-    loadChampions();
-    loadMessages();
-  </script>
 </body>
 </html>
